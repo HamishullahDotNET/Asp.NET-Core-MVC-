@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Movie>
+
+@{
+    ViewData["Title"] = "List of Movies";
+}
+<div class="container-fluid">
+    @foreach (var item in Model)
+    {
+
+
+        <div class="card" style="max-width: 540px;">
+            <div class="card-header d-inline">
+                @* Card Header *@
+                <strong>@item.Name</strong>
+            </div>
+            <div class="row g-0">
+                <!-- Left Side: Image -->
+                <div class="col-md-4">
+                    <img src="@item.ImageURL" class="img-fluid h-100 w-100" alt="@item.Name" style="object-fit: cover;" alt="@item.Name">
+                </div>
+
+                <!-- Right Side: Titles -->
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text"><small class="text-muted"><strong>Start Date:</strong> @item.StartDate.ToString("dd MMM yyyy")</small></p>
+                        <p class="card-text"><small class="text-muted"><strong>End Date:</strong> @item.EndDate.ToString("dd MMM yyyy")</small></p>
+                        <p class="card-text"><small class="text-muted"><strong>Category:</strong> @item.MovieCategory</small></p>
+                        <p class="card-text"><small class="text-muted"><strong>Cinema:</strong> @item.Cinema.Name</small></p>
+                        <p class="card-text"><small class="text-muted"><strong>Producer:</strong> @item.Producer.FullName</small></p>
+                        <p class="card-text"><small class="text-muted"><strong>Stutus</strong> 
+                                @if (DateTime.Now > item.StartDate && DateTime.Now < item.EndDate)
+                                {
+                                    <span class="badge bg-success text-white">AVALIBLE</span>
+                                }
+                              
+
+
+                            </small></p>
+                    </div>
+            </div>
+        </div>
+            <div class="card-footer d-flex justify-content-between">
+                @* Card Footer *@
+                <button class="btn btn-outline-success w-50  d-inline"><i class="bi bi-cart"></i> Add To Card: (Price @item.Price.ToString("c"))</button>
+                <button class="btn btn-outline-success  d-inline">More details</button>
+            </div>
+    </div>
+
+}
+</div>
